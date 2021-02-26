@@ -1,9 +1,12 @@
 import React from 'react';
 import styles from './styles'
-import ClassList from './components/ClassList'
+import ClassListPage from './pages/ClassListPage'
+import { View } from 'react-native';
 
 export default function App() {
   return (
-    <ClassList />
+    <View style={styles.container}>
+      <ClassListPage />
+    </View>
   );
 }
