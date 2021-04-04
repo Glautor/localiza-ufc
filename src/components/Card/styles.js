@@ -44,6 +44,13 @@ const styles = StyleSheet.create({
   },
   subjectWeekDays: {
     color: 'rgb(144, 143, 143)'
+  },
+  heartImg: {
+    width: 30,
+    height: 30,
+    // position: 'absolute',
+    // marginTop: 50,
+    // marginLeft: 310,
   }
 });
 

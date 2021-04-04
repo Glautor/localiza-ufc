@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       padding: 30
   },
-
   input: {
       height: 46,
       alignSelf: 'stretch',
@@ -19,7 +18,6 @@ const styles = StyleSheet.create({
       marginTop: 5,
       paddingHorizontal: 15
   },
-
   button: {
       height: 46,
       alignSelf: 'stretch',
@@ -29,7 +27,6 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center'
   },
-
   buttonText: {
       color: '#fff',
       fontWeight: 'bold',
@@ -37,7 +34,8 @@ const styles = StyleSheet.create({
   },
   logoImg: {
     width: 300,
-    height: 300
+    height: 300,
+    marginTop: -50
   },
   createAccountTextWrapper: {
     display: 'flex',

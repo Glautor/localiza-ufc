@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   },
   logoImg: {
     width: 300,
-    height: 300
+    height: 300,
+    marginTop: -50
   },
   createAccountTextWrapper: {
     display: 'flex',

@@ -43,8 +43,8 @@ export default function LoginPage({ navigation }) {
             placeholder="Digite sua matrícula"
             placeholderTextColor="#999"
             style={styles.input}
-            value={user}
-            onChangeText={setUser}
+            value={userRegistrationNumber}
+            onChangeText={setUserRegistrationNumber}
             />
 
             <TextInput
@@ -53,8 +53,8 @@ export default function LoginPage({ navigation }) {
             placeholder="Digite sua senha"
             placeholderTextColor="#999"
             style={styles.input}
-            value={user}
-            onChangeText={setUser}
+            value={userPassword}
+            onChangeText={setUserPassword}
             />
 
             <TouchableOpacity onPress={handleLogin} style={styles.button}>
