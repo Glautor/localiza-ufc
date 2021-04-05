@@ -18,26 +18,95 @@ class Firebase {
     measurementId: "G-KZY9K9J30T"
   };
 
-  salvarUsuario(uNome, uNomeCompleto, uEmail, uSenha, aMatricula) {
+  saveData(path, key, data) {
     firebase.database()
-      .ref('usuarios/' + uNome).set({
-        nomeCompleto: uNomeCompleto,
-        email: uEmail,
-        senha: uSenha,
-        matricula: aMatricula,
+      .ref(path + key)
+      .set(data);
+  }
+
+  setListener(path, key, onChange) {
+    firebase.database()
+      .ref(path + key)
+      .on('value', (snapshot) => onChange(snapshot.val()));
+  }
+
+  getData(path, key) {
+    let data;
+
+    firebase.database()
+      .ref(path + key)
+      .once('value', (snapshot) => data = snapshot.val());
+
+      return data;
+  }
+
+  getNFirst(path, n) {
+    let data;
+
+    firebase.database()
+    .ref(path)
+    .orderByValue().limitToFirst(n)
+    .once('value', (snapshot) => data = snapshot.val());
+
+    return data;
+  }
+
+  salvarUsuario(dadosUsuario) {
+    firebase.database()
+      .ref('usuarios/' + dadosUsuario.uNome).set({
+        nomeCompleto: dadosUsuario.uNomeCompleto,
+        email: dadosUsuario.uEmail,
+        senha: dadosUsuario.uSenha,
+        matricula: dadosUsuario.aMatricula,
       });
   }
 
-  salvarDisciplina(dNome, dCodigo, dHorario, dBloco, dSala, dProfessor, dSemestre) {
+  salvarDisciplina(dadosDisciplina) {
     firebase.database()
-      .ref('disciplinas/' + dNome).set({
-        codigo: dCodigo,
-        horario: dHorario,
-        bloco: dBloco,
-        sala: dSala,
-        professor: dProfessor,
-        semestre: dSemestre,
-      })
+      .ref('disciplinas/' + dadosDisciplina.dCodigo).set({
+        nome: dadosDisciplina.dNome,
+        horario: dadosDisciplina.dHorario,
+        bloco: dadosDisciplina.dBloco,
+        sala: dadosDisciplina.dSala,
+        professor: dadosDisciplina.dProfessor,
+        semestre: dadosDisciplina.dSemestre,
+      });
+  }
+
+  inscreverDisciplina(dCodigo, uNome, inscrever = true) {
+    var data = {};
+    data[uNome] = inscrever;
+
+    firebase.database()
+      .ref('inscricoes/' + dCodigo).set(data);
+  }
+
+  obterSenhaUsuario(uNome, onChange) {
+    firebase.database()
+      .ref('usuarios/' + uNome + '/senha').once('value', (snapshot) => {
+        onChange(snapshot.val());
+      });
+  }
+
+  obterInfoUsuario(uNome, onChange) {
+    firebase.database()
+      .ref('usuarios/' + uNome).on('value', (snapshot) => {
+        onChange(snapshot.val());
+      });
+  }
+
+  obterInfoDisciplina(dCodigo, onChange) {
+    firebase.database()
+      .ref('usuarios/' + dCodigo).on('value', (snapshot) => {
+        onChange(snapshot.val());
+      });
+  }
+
+  obterListaInscritos(dCodigo, onChange) {
+    firebase.database()
+      .ref('inscricoes/' + dCodigo).on('value', (snapshot) => {
+        onChange(snapshot.val());
+      });
   }
 }
 
