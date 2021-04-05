@@ -1,14 +1,15 @@
 import React from 'react';
 import styles from './styles'
-import ClassListPage from './pages/ClassListPage'
-import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
 import { View } from 'react-native';
 
-export default function App() {
+import AppRoutes from './routes';
+
+export default function App({ navigation }) {
   return (
+    <>
     <View style={styles.container}>
-      <ClassListPage />
+      <AppRoutes />
     </View>
+    </>
   );
 }

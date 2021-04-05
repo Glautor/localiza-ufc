@@ -44,6 +44,15 @@ const styles = StyleSheet.create({
   },
   subjectWeekDays: {
     color: 'rgb(144, 143, 143)'
+  },
+  iconImg: {
+    width: 30,
+    height: 30,
+  },
+  iconStyle: {
+    position: 'absolute',
+    marginTop: 50,
+    marginLeft: 310,
   }
 });
 

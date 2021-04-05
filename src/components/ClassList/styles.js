@@ -3,7 +3,8 @@ import { StyleSheet, StatusBar } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginBottom: 70,
+    marginTop: 10
   },
   item: {
     backgroundColor: '#83C074',
