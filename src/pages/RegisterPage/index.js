@@ -40,42 +40,45 @@ export default function LoginPage({ navigation }) {
             <Image source={logo} style={styles.logoImg} />
 
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Nome"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userName}
-            onChangeText={setUserName}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Nome"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userName}
+              onChangeText={setUserName}
             />
 
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Matrícula"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userRegistrationNumber}
-            onChangeText={setUserRegistrationNumber}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Matrícula"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userRegistrationNumber}
+              onChangeText={setUserRegistrationNumber}
             />
 
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Senha"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userPassword}
-            onChangeText={setUserPassword}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Senha"
+              type="password"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userPassword}
+              onChangeText={setUserPassword}
             />
+
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Confirmar senha"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userConfirmPassword}
-            onChangeText={setUserConfirmPassword}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Confirmar senha"
+              type="password"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userConfirmPassword}
+              onChangeText={setUserConfirmPassword}
             />
 
             <TouchableOpacity onPress={handleLogin} style={styles.button}>
@@ -84,7 +87,7 @@ export default function LoginPage({ navigation }) {
             <View style={styles.createAccountTextWrapper}>
               <Text style={styles.hasAccountText}>Já tem uma conta? </Text> 
               <Text style={styles.signInLink}
-                    onPress={() => Linking.openURL('http://google.com')}>
+            onPress={() => navigation.goBack()}>
                 Fazer login!
               </Text>
             </View>

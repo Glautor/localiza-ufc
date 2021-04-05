@@ -12,21 +12,22 @@ export default function LoginPage({ navigation }) {
     const [userPassword, setUserPassword] = useState('');
 
     // useEffect(() => {
-    //     AsyncStorage.getItem('user').then(user => {
-    //         if (user) {
-    //             navigation.navigate('Main', { user });
-    //         }
-    //     }).catch(err => err)
+    //   AsyncStorage.getItem('user').then(user => {
+    //       if (user) {
+    //           navigation.navigate('Main', { user });
+    //       }
+    //   }).catch(err => err)
     // }, []);
 
     async function handleLogin() {
-        // const response = await api.post('/devs', { username: user });       
+      navigation.navigate('SubjectPages')
+      // const response = await api.post('/devs', { username: user });       
 
-        // const { _id } = response.data;
+      // const { _id } = response.data;
 
-        // await AsyncStorage.setItem('user', _id);
+      // await AsyncStorage.setItem('user', _id);
 
-        // navigation.navigate('Main', { user: _id });
+      // navigation.navigate('Main', { user: _id });
     }
 
     return (
@@ -38,23 +39,24 @@ export default function LoginPage({ navigation }) {
             <Image source={logo} style={styles.logoImg} />
 
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Digite sua matrícula"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userRegistrationNumber}
-            onChangeText={setUserRegistrationNumber}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite sua matrícula"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userRegistrationNumber}
+              onChangeText={setUserRegistrationNumber}
             />
 
             <TextInput
-            autoCapitalize="none"
-            autoCorrect={false}
-            placeholder="Digite sua senha"
-            placeholderTextColor="#999"
-            style={styles.input}
-            value={userPassword}
-            onChangeText={setUserPassword}
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite sua senha"
+              type="password"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userPassword}
+              onChangeText={setUserPassword}
             />
 
             <TouchableOpacity onPress={handleLogin} style={styles.button}>
@@ -63,7 +65,7 @@ export default function LoginPage({ navigation }) {
             <View style={styles.createAccountTextWrapper}>
               <Text style={styles.noAccountText}>Não tem conta? </Text> 
               <Text style={styles.createAccountLink}
-                    onPress={() => Linking.openURL('http://google.com')}>
+            onPress={() => navigation.navigate('RegisterPage')}>
                 Crie uma agora!
               </Text>
             </View>
