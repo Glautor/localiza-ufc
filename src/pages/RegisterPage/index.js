@@ -7,7 +7,7 @@ import { View, KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInpu
 import styles from './styles';
 import logo from '../../../assets/logo.png';
 
-import * as fb from "../../classes/firebase.js"
+import Firebase from '../../classes/firebase';
 
 export default function LoginPage({ navigation }) {
     const [userName, setUserName] = useState('');
@@ -32,8 +32,8 @@ export default function LoginPage({ navigation }) {
         // await AsyncStorage.setItem('user', _id);
 
         // navigation.navigate('Main', { user: _id });
-
-       //firebase.SignUp("breno.silva.2903@gmail.com", "Breno da silva Oliveira", "Breno", "427528"); 
+        //var t = Firebase.
+        Firebase.signUp(userEmail, userPassword, userName, userRegistrationNumber); 
     }
 
     return (

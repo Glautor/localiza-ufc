@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import "firebase/firestore";
 import {Alert} from "react-native";
 
 class Firebase {
@@ -17,7 +18,7 @@ class Firebase {
     appId: "1:416784167534:web:601062edf50786bfeaec7f"
   };
 
-  SignUp(email, password, name, registration) {
+  signUp(email, password, name, registration) {
     try {
       firebase.auth().createUserWithEmailAndPassword(email, password);
       const currentUser = firebase.auth().currentUser;
@@ -32,6 +33,14 @@ class Firebase {
         });
     } catch (err) {
       Alert.alert("Erro ao cadastrar!", err.message);
+    }
+  }
+
+  signIn(email, password) {
+    try {
+     firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (err) {
+      Alert.alert("Erro ao entrar!", err.message);
     }
   }
 

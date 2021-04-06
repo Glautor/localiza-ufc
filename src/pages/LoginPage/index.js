@@ -6,6 +6,7 @@ import { View, KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInpu
 
 import styles from './styles';
 import logo from '../../../assets/logo.png';
+import Firebase from '../../classes/firebase';
 
 export default function LoginPage({ navigation }) {
     const [userRegistrationEmail, setUserRegistrationEmail] = useState('');
@@ -20,7 +21,7 @@ export default function LoginPage({ navigation }) {
     // }, []);
 
     async function handleLogin() {
-      navigation.navigate('SubjectPages')
+      //navigation.navigate('SubjectPages')
       // const response = await api.post('/devs', { username: user });       
 
       // const { _id } = response.data;
@@ -28,6 +29,7 @@ export default function LoginPage({ navigation }) {
       // await AsyncStorage.setItem('user', _id);
 
       // navigation.navigate('Main', { user: _id });
+      Firebase.signIn(userRegistrationEmail, userPassword);
     }
 
     return (
