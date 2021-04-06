@@ -12,7 +12,7 @@ const NavStack = createStackNavigator(
       SubjectPages: { 
           screen: SubjectPages,
           navigationOptions: {
-            title: 'Cadeiras',
+            title: 'Diciplinas',
             headerLeft: () => null
           },
       },

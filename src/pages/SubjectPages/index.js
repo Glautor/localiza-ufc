@@ -7,17 +7,17 @@ import MySubjects from './MySubjects'
 
 const areas = [
   {
-    title: 'Lista de cadeiras',
+    title: 'Lista de disciplinas',
     screen: 'SubjectListPage',
     iconSrc: require('../../../assets/list.jpg'),
   },
   {
-    title: 'Cadeiras favoritas',
+    title: 'Disciplinas favoritas',
     screen: 'LikedSubjects',
     iconSrc: require('../../../assets/empty-heart.jpg'),
   },
   {
-    title: 'Minhas cadeiras',
+    title: 'Minhas disciplinas',
     screen: 'MySubjects',
     iconSrc: require('../../../assets/edit.jpg'),
   }
@@ -34,11 +34,11 @@ export default function SubjectPages({ navigation }) {
           )
         }
         {screen === 'LikedSubjects' && (
-            <LikedSubjects title='Cadeiras favoritas' />
+            <LikedSubjects title='Disciplinas favoritas' />
           )
         }
         {screen === 'MySubjects' && (
-            <MySubjects navigation={navigation} title='Minhas cadeiras' />
+            <MySubjects navigation={navigation} title='Minhas disciplinas' />
           )
         }
       </View>

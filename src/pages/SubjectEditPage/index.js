@@ -98,7 +98,7 @@ export default function SubjectEditPage({ navigation }) {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="Imagem da cadeira"
+              placeholder="Imagem da disciplina"
               placeholderTextColor="#999"
               style={styles.input}
               value={courseImage}

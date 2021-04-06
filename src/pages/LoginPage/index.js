@@ -60,7 +60,7 @@ export default function LoginPage({ navigation }) {
             />
 
             <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text style={styles.buttonText}>Enviar</Text>
+                <Text style={styles.buttonText}>Entrar</Text>
             </TouchableOpacity>
             <View style={styles.createAccountTextWrapper}>
               <Text style={styles.noAccountText}>Não tem conta? </Text> 
