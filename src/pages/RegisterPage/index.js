@@ -7,11 +7,14 @@ import { View, KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInpu
 import styles from './styles';
 import logo from '../../../assets/logo.png';
 
+import * as fb from "../../classes/firebase.js"
+
 export default function LoginPage({ navigation }) {
     const [userName, setUserName] = useState('');
     const [userRegistrationNumber, setUserRegistrationNumber] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [userConfirmPassword, setUserConfirmPassword] = useState('');
+    const [userEmail, setUserEmail] = useState('');
     
     // useEffect(() => {
     //     AsyncStorage.getItem('user').then(user => {
@@ -21,7 +24,7 @@ export default function LoginPage({ navigation }) {
     //     }).catch(err => err)
     // }, []);
 
-    async function handleLogin() {
+    function handleLogin() {
         // const response = await api.post('/devs', { username: user });       
 
         // const { _id } = response.data;
@@ -29,6 +32,8 @@ export default function LoginPage({ navigation }) {
         // await AsyncStorage.setItem('user', _id);
 
         // navigation.navigate('Main', { user: _id });
+
+       //firebase.SignUp("breno.silva.2903@gmail.com", "Breno da silva Oliveira", "Breno", "427528"); 
     }
 
     return (
@@ -54,6 +59,7 @@ export default function LoginPage({ navigation }) {
               autoCorrect={false}
               placeholder="Matrícula"
               placeholderTextColor="#999"
+              keyboardType="decimal-pad"
               style={styles.input}
               value={userRegistrationNumber}
               onChangeText={setUserRegistrationNumber}
@@ -62,8 +68,21 @@ export default function LoginPage({ navigation }) {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
+              placeholder="E-mail"
+              keyboardType="email-address"
+              type="email"
+              placeholderTextColor="#999"
+              style={styles.input}
+              value={userEmail}
+              onChangeText={setUserEmail}
+            />
+
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
               placeholder="Senha"
               type="password"
+              secureTextEntry={true}             
               placeholderTextColor="#999"
               style={styles.input}
               value={userPassword}
@@ -75,6 +94,7 @@ export default function LoginPage({ navigation }) {
               autoCorrect={false}
               placeholder="Confirmar senha"
               type="password"
+              secureTextEntry={true}   
               placeholderTextColor="#999"
               style={styles.input}
               value={userConfirmPassword}

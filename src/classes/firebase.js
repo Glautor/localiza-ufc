@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import {Alert} from "react-native";
 
 class Firebase {
   constructor() {
@@ -8,15 +9,31 @@ class Firebase {
   }
 
   firebaseConfig = {
-    apiKey: "AIzaSyC6lqEkMSSbH1cVks22W5GstqJZfyB6WN0",
-    authDomain: "localiza-ufc.firebaseapp.com",
-    databaseURL: "https://localiza-ufc-default-rtdb.firebaseio.com",
-    projectId: "localiza-ufc",
-    storageBucket: "localiza-ufc.appspot.com",
-    messagingSenderId: "1080683477471",
-    appId: "1:1080683477471:web:ca2de2728ee698d568ec6a",
-    measurementId: "G-KZY9K9J30T"
+    apiKey: "AIzaSyCAEcA0S8V3pui5JT9daKqvgwToswFz5pU",
+    authDomain: "localiza-ufc-ae1f0.firebaseapp.com",
+    projectId: "localiza-ufc-ae1f0",
+    storageBucket: "localiza-ufc-ae1f0.appspot.com",
+    messagingSenderId: "416784167534",
+    appId: "1:416784167534:web:601062edf50786bfeaec7f"
   };
+
+  SignUp(email, password, name, registration) {
+    try {
+      firebase.auth().createUserWithEmailAndPassword(email, password);
+      const currentUser = firebase.auth().currentUser;
+  
+      const db = firebase.firestore();
+      db.collection("users")
+        .doc(currentUser.uid)
+        .set({
+          email: currentUser.email,
+          name: name,
+          registration: registration,
+        });
+    } catch (err) {
+      Alert.alert("Erro ao cadastrar!", err.message);
+    }
+  }
 
   saveData(path, key, data) {
     firebase.database()

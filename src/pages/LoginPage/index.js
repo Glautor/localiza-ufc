@@ -8,7 +8,7 @@ import styles from './styles';
 import logo from '../../../assets/logo.png';
 
 export default function LoginPage({ navigation }) {
-    const [userRegistrationNumber, setUserRegistrationNumber] = useState('');
+    const [userRegistrationEmail, setUserRegistrationEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
 
     // useEffect(() => {
@@ -41,11 +41,11 @@ export default function LoginPage({ navigation }) {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              placeholder="Digite sua matrícula"
+              placeholder="Digite seu e-mail"
               placeholderTextColor="#999"
               style={styles.input}
-              value={userRegistrationNumber}
-              onChangeText={setUserRegistrationNumber}
+              value={userRegistrationEmail}
+              onChangeText={setUserRegistrationEmail}
             />
 
             <TextInput
@@ -55,6 +55,7 @@ export default function LoginPage({ navigation }) {
               type="password"
               placeholderTextColor="#999"
               style={styles.input}
+              secureTextEntry={true}  
               value={userPassword}
               onChangeText={setUserPassword}
             />
