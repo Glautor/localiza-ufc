@@ -5,7 +5,6 @@ import Card from '../Card'
 
 import firebase from '../../classes/firebase';
 
-import DATA from '../../api/subjects.json'
 import { useState } from 'react';
 import { useEffect } from 'react';
 

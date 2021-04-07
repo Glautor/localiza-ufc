@@ -25,8 +25,7 @@ export default function Card({
     longitude,
     likedSubject,
     iconEvent,
-    navigation,
-    route
+    navigation
   }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(likedSubject);
@@ -38,7 +37,7 @@ export default function Card({
       if (isIt === false) {
         firebase.likeSubject(subjectId).then(() => {
           setLiked(true);
-          setTrashSubject(true);
+          setTrashSubject(false);
         });
       } else {
         firebase.unlikeSubject(subjectId).then(() => {
@@ -52,17 +51,9 @@ export default function Card({
   const handleTrashSubject = () => {
     firebase.unlikeSubject(subjectId).then(() => {
       setLiked(false);
-      setTrashSubject(false);
+      setTrashSubject(true);
     });
   }
-
-  // const show = () => {
-  //   if (iconEvent === 'heart') {
-  //     return true
-  //   } else if (iconEvent === 'trash') {
-  //     return !liked
-  //   }
-  // }
 
   useEffect(() => {
     if (iconEvent === 'heart' || iconEvent === 'edit') {
@@ -70,9 +61,11 @@ export default function Card({
     } else if (iconEvent === 'trash') {
       if (liked) {
         setShow(true);
+      } else {
+        setShow(false);
       }
     }
-  }, [])
+  }, [liked])
 
   const handlEditSubject = () => {
     navigation.navigate('SubjectEditPage', {

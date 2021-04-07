@@ -7,7 +7,7 @@ import AppRoutes from './routes'
 export default function App({ navigation }) {
 
   useEffect(() => {
-    LogBox.ignoreLogs(['Setting a timer']);
+    LogBox.ignoreLogs(['Setting a timer', 'Failed prop type', "Can't perform a React state update on an unmounted"]);
   })
 
   return (
