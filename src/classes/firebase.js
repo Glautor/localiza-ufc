@@ -11,6 +11,10 @@ class Firebase {
     }
   }
 
+  getUserId() {
+    return firebase.auth().currentUser.uid;
+  }
+
   async signUp(email, password, name, registration) {
     var result = false
     try {
@@ -36,19 +40,40 @@ class Firebase {
     return result
   }
 
+  async signIn(email, password) {
+    var result = false
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function (user) {
+          console.log(user);
+          result = true
+        })
+    } catch (error) {
+      result = false
+    }
+    return result
+  }
+
   async removeItem(itemId) {
-    Alert.alert(
-      "Tem certeza?",
-      "Certeza que quer excluir essa disciplina?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => firebase.firestore().collection('disciplinas').doc(itemId).delete() }
-      ]
-    );
+    firebase.firestore().collection('disciplinas').doc(itemId).delete();
+  }
+
+  async editItems(subjectId, subjectData) {
+    let result = false;
+
+    try {
+      await firebase.firestore()
+      .collection('disciplinas')
+      .doc(subjectId)
+      .set(subjectData);
+
+      result = true;
+    } catch (err) {
+      Alert.alert("Erro ao cadastrar disciplina!", err.message);
+      result = false;
+    }
+
+    return result;
   }
 
   async getItems() {
@@ -62,7 +87,7 @@ class Firebase {
 
     snapshot.forEach((doc) => {
       var data = doc.data();
-      data['id'] = doc.id;
+      data['subjectId'] = doc.id;
 
       if (likedItems.includes(doc.id)) {
         data['likedSubject'] = true;
@@ -73,6 +98,7 @@ class Firebase {
 
     return itemList;
   }
+
   async newItem(subjectData) {
     let result = false;
 
@@ -88,20 +114,6 @@ class Firebase {
     }
 
     return result;
-  }
-
-  async signIn(email, password) {
-    var result = false
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(function (user) {
-          console.log(user);
-          result = true
-        })
-    } catch (error) {
-      result = false
-    }
-    return result
   }
 
   async getLikedSubjects() {
@@ -203,39 +215,6 @@ class Firebase {
         .doc(currentUser.uid)
         .set(data);
     }
-  }
-
-  saveData(path, key, data) {
-    firebase.database()
-      .ref(path + key)
-      .set(data);
-  }
-
-  setListener(path, key, onChange) {
-    firebase.database()
-      .ref(path + key)
-      .on('value', (snapshot) => onChange(snapshot.val()));
-  }
-
-  getData(path, key) {
-    let data;
-
-    firebase.database()
-      .ref(path + key)
-      .once('value', (snapshot) => data = snapshot.val());
-
-    return data;
-  }
-
-  getNFirst(path, n) {
-    let data;
-
-    firebase.database()
-      .ref(path)
-      .orderByValue().limitToFirst(n)
-      .once('value', (snapshot) => data = snapshot.val());
-
-    return data;
   }
 }
 

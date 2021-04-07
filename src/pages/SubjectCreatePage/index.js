@@ -39,6 +39,7 @@ export default function SubjectCreatePage({ navigation }) {
 
     const handleSave = () => {
       firebase.newItem({
+        createdBy: firebase.getUserId(),
         subjectName: subjectName,
         subjectHour: subjectHour,
         subjectWeekDays: subjectWeekDays,

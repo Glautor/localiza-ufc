@@ -19,7 +19,8 @@ const ClassList = ({ iconEvent, navigation }) => {
 
   const renderCard = ({ item }) => (
     <Card
-      subjectId={item.id}
+      createdBy={item.createdBy}
+      subjectId={item.subjectId}
       subjectName={item.subjectName}
       courseImage={item.courseImage}
       courseName={item.courseName}
