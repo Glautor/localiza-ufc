@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { View, KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
 
@@ -6,7 +7,6 @@ import { View, KeyboardAvoidingView, Platform, Text, StyleSheet, Image, TextInpu
 
 import styles from './styles';
 import logo from '../../../assets/logo.png';
-
 import Firebase from '../../classes/firebase';
 
 export default function LoginPage({ navigation }) {
@@ -15,7 +15,8 @@ export default function LoginPage({ navigation }) {
     const [userPassword, setUserPassword] = useState('');
     const [userConfirmPassword, setUserConfirmPassword] = useState('');
     const [userEmail, setUserEmail] = useState('');
-    
+      
+
     // useEffect(() => {
     //     AsyncStorage.getItem('user').then(user => {
     //         if (user) {
@@ -24,16 +25,14 @@ export default function LoginPage({ navigation }) {
     //     }).catch(err => err)
     // }, []);
 
-    function handleLogin() {
-        // const response = await api.post('/devs', { username: user });       
+    async function handleLogin() {   
+        var result = await Firebase.signUp(userEmail, userPassword, userName, userRegistrationNumber); 
 
-        // const { _id } = response.data;
-
-        // await AsyncStorage.setItem('user', _id);
-
-        // navigation.navigate('Main', { user: _id });
-        //var t = Firebase.
-        Firebase.signUp(userEmail, userPassword, userName, userRegistrationNumber); 
+        if(result){
+          navigation.goBack()
+        }else{
+          
+        }
     }
 
     return (
