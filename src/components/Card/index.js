@@ -14,7 +14,6 @@ export default function Card({
     subjectWeekDays,
     subjectCode,
     profesorName,
-    localization,
     courseName,
     courseImage,
     observation,
@@ -46,7 +45,19 @@ export default function Card({
     <>
       {trashSubject && (
         <>
-          <Modal setModalVisible={setModalVisible} modalVisible={modalVisible} subjectName={subjectName}/>
+          <Modal
+            setModalVisible={setModalVisible}
+            modalVisible={modalVisible}
+            subjectName={subjectName}
+            subjectCode={subjectCode}
+            profesorName={profesorName}
+            observation={observation}
+            localName={localName}
+            localDescription={localDescription}
+            latitude={latitude}
+            longitude={longitude}
+          />
+
           <TouchableOpacity style={styles.item} onPress={() => setModalVisible(true)}>
             <View style={styles.courseContainer}>
               <Image
@@ -56,8 +67,8 @@ export default function Card({
               <Text style={styles.courseName}>{courseName}</Text>
             </View>
             <View style={styles.subjectContainer}>
-              <Text style={styles.subjectHour}>08:00-10:00</Text>
-              <Text style={styles.subjectWeekDays}>Seg | Qua</Text>
+              <Text style={styles.subjectHour}>{subjectHour}</Text>
+              <Text style={styles.subjectWeekDays}>{subjectWeekDays}</Text>
               <Text style={styles.subjectName}>{subjectCode} - {subjectName}</Text>
             </View>
           </TouchableOpacity>

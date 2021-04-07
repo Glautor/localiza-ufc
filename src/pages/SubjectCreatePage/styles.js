@@ -2,32 +2,54 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      padding: 30
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    padding: 30,
+    overflow: 'scroll',
   },
 
   input: {
-      height: 46,
-      alignSelf: 'stretch',
-      backgroundColor: '#f5f5f5',
-      borderWidth: 1,
-      borderColor: '#ddd',
-      borderRadius: 4,
-      marginTop: 5,
-      paddingHorizontal: 15
+    height: 46,
+    alignSelf: 'stretch',
+    backgroundColor: '#f5f5f5',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 4,
+    marginTop: 5,
+    paddingHorizontal: 15
   },
 
   saveButton: {
-      height: 46,
-      alignSelf: 'stretch',
-      backgroundColor: '#03679D',
-      borderRadius: 4,
-      marginTop: 10,
-      justifyContent: 'center',
-      alignItems: 'center'
+    height: 46,
+    alignSelf: 'stretch',
+    backgroundColor: '#03679D',
+    borderRadius: 4,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+
+  locationLoaded: {
+    color: '#63B68D',
+    marginTop: 8
+  },
+
+  myLocalizationButtonText: {
+    color: '#03679D',
+  },
+
+  myLocalizationButton: {
+    height: 46,
+    alignSelf: 'stretch',
+    backgroundColor: 'transparent',
+    borderColor: '#03679D',
+    borderWidth: 1,
+    borderRadius: 4,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   deleteButton: {
@@ -40,9 +62,9 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
-      fontSize: 16
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16
   },
 
   logoImg: {

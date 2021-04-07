@@ -13,6 +13,14 @@ const ClassList = ({ iconEvent, navigation }) => {
       courseName={item.courseName}
       subjectCode={item.subjectCode}
       likedSubject={item.likedSubject}
+      subjectHour={item.subjectHour}
+      subjectWeekDays={item.subjectWeekDays}
+      profesorName={item.profesorName}
+      observation={item.observation}
+      localName={item.localName}
+      localDescription={item.localDescription}
+      latitude={item.latitude}
+      longitude={item.longitude}
       iconEvent={iconEvent}
       navigation={navigation}
     />
