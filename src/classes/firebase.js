@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import "firebase/firestore";
-import {Alert} from "react-native";
+import { Alert } from "react-native";
 
 class Firebase {
   constructor() {
@@ -22,18 +22,19 @@ class Firebase {
     var result = false
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
-      const currentUser = firebase.auth().currentUser;  
-      if(currentUser != null){
+      const currentUser = firebase.auth().currentUser;
+      if (currentUser != null) {
         const db = firebase.firestore();
         db.collection("users")
-        .doc(currentUser.uid)      
-        .set({
-          email: currentUser.email,
-          name: name,
-          registration: registration,
-        });
+          .doc(currentUser.uid)
+          .set({
+            email: currentUser.email,
+            name: name,
+            registration: registration,
+            likedSubjects: [],
+          });
         result = true
-      }      
+      }
     } catch (err) {
       Alert.alert("Erro ao cadastrar!", err.message);
       result = false
@@ -44,19 +45,19 @@ class Firebase {
 
   async getItems() {
     var itemList = [];
-  
+
     var snapshot = await firebase
       .firestore()
       .collection("disciplinas")
       .get();
-  
+
     snapshot.forEach((doc) => {
       var data = doc.data();
       data['id'] = doc.id;
 
       itemList.push(data);
     });
-  
+
     return itemList;
   }
   async newItem(subjectData) {
@@ -64,8 +65,8 @@ class Firebase {
 
     try {
       await firebase.firestore()
-      .collection('disciplinas')
-      .add(subjectData);
+        .collection('disciplinas')
+        .add(subjectData);
 
       result = true;
     } catch (err) {
@@ -78,16 +79,73 @@ class Firebase {
 
   async signIn(email, password) {
     var result = false
-    try{
+    try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(function (user){        
-        console.log(user);
-        result = true
-      })
-    }catch(error){
+        .then(function (user) {
+          console.log(user);
+          result = true
+        })
+    } catch (error) {
       result = false
-    } 
-    return result  
+    }
+    return result
+  }
+
+  async likeSubject(subjectId) {
+    const currentUser = firebase.auth().currentUser;
+
+    if (currentUser !== null) {
+      var snapshot = await firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+      var data = snapshot.data();
+      var likedSubjects = data.likedSubjects;
+
+      if (likedSubjects === null) {
+        likedSubjects = [];
+      }
+
+      likedSubjects.push(subjectId);
+      data.likedSubjects = likedSubjects;
+
+      firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .set(data);
+    }
+  }
+
+  async unlikeSubject(subjectId) {
+    const currentUser = firebase.auth().currentUser;
+
+    if (currentUser !== null) {
+      var snapshot = await firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+      var data = snapshot.data();
+      var likedSubjects = data.likedSubjects;
+
+      if (likedSubjects === null) {
+        return;
+      }
+
+      var index = likedSubjects.indexOf(subjectId);
+
+      if (index > -1) {
+        likedSubjects.splice(index, 1);
+      }
+
+      data.likedSubjects = likedSubjects;
+
+      firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .set(data);
+    }
   }
 
   saveData(path, key, data) {
@@ -121,7 +179,7 @@ class Firebase {
       .once('value', (snapshot) => data = snapshot.val());
 
     return data;
-  }    
+  }
 }
 
 export default new Firebase();
