@@ -19,6 +19,10 @@ export default function Card({
     courseImage,
     observation,
     likedSubject,
+    latitude,
+    longitude,
+    localName,
+    localDescription,
     iconEvent,
     navigation
   }) {

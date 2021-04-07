@@ -29,7 +29,8 @@ export default function LoginPage({ navigation }) {
       // await AsyncStorage.setItem('user', _id);
 
       // navigation.navigate('Main', { user: _id });
-      Firebase.signIn(userRegistrationEmail, userPassword);  
+      // Firebase.signIn(userRegistrationEmail, userPassword);
+      navigation.navigate('SubjectPages');
     }
 
     return (

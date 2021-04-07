@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 30
+      paddingLeft: 30,
+      paddingRight: 30
   },
 
   input: {
