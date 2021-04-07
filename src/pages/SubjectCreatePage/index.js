@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
+import firebase from '../../classes/firebase';
+
 import styles from './styles';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
@@ -20,6 +22,23 @@ export default function SubjectCreatePage({ navigation }) {
     const [longitude, setLongitude] = useState(null)
 
     const handleSave = () => {
+      firebase.newItem({
+        subjectName: subjectName,
+        subjectHour: subjectHour,
+        subjectWeekDays: subjectWeekDays,
+        subjectCode: subjectCode,
+        profesorName: profesorName,
+        courseName: courseName,
+        courseImage: (courseImage === '') ? 'https://i.pinimg.com/474x/06/3e/74/063e742a8e8c4f256c179ffcdcfc8a32--caduceus-tattoo-hen-house.jpg' : courseImage,
+        observation: observation,
+        localName: localName,
+        localDescription: localDescription,
+        latitude: latitude,
+        longitude: longitude,
+      }).then((result) => {
+        navigation.goBack();
+      });
+      
       // const response = await api.post('/disciplines', { 
       //   subjectName,
       //   subjectHour,
@@ -36,7 +55,6 @@ export default function SubjectCreatePage({ navigation }) {
       //   longitude,
       // });
       // const { _id } = response.data;
-      navigation.goBack();
     }
 
     const getLocation = async () => {

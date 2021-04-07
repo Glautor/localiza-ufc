@@ -55,7 +55,23 @@ class Firebase {
     });
   
     return itemList;
-  } 
+  }
+  async newItem(subjectData) {
+    let result = false;
+
+    try {
+      await firebase.firestore()
+      .collection('disciplinas')
+      .add(subjectData);
+
+      result = true;
+    } catch (err) {
+      Alert.alert("Erro ao cadastrar disciplina!", err.message);
+      result = false;
+    }
+
+    return result;
+  }
 
   async signIn(email, password) {
     var result = false
