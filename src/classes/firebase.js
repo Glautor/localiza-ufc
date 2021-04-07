@@ -2,21 +2,14 @@ import * as firebase from 'firebase';
 import "firebase/firestore";
 import { Alert } from "react-native";
 
+import FIREBASECONFIG from '../../firebase-config.json';
+
 class Firebase {
   constructor() {
     if (firebase.apps.length === 0) {
-      firebase.initializeApp(this.firebaseConfig);
+      firebase.initializeApp(FIREBASECONFIG.firebaseConfig);
     }
   }
-
-  firebaseConfig = {
-    apiKey: "AIzaSyCAEcA0S8V3pui5JT9daKqvgwToswFz5pU",
-    authDomain: "localiza-ufc-ae1f0.firebaseapp.com",
-    projectId: "localiza-ufc-ae1f0",
-    storageBucket: "localiza-ufc-ae1f0.appspot.com",
-    messagingSenderId: "416784167534",
-    appId: "1:416784167534:web:601062edf50786bfeaec7f"
-  };
 
   async signUp(email, password, name, registration) {
     var result = false
