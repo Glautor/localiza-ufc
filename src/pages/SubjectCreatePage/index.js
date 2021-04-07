@@ -46,7 +46,7 @@ export default function SubjectCreatePage({ navigation }) {
         subjectCode: subjectCode,
         profesorName: profesorName,
         courseName: courseName,
-        courseImage: (courseImage === '') ? 'https://i.pinimg.com/474x/06/3e/74/063e742a8e8c4f256c179ffcdcfc8a32--caduceus-tattoo-hen-house.jpg' : courseImage,
+        courseImage: (courseImage === '') ?  'https://i.pinimg.com/736x/02/e1/b4/02e1b42476471d6856b61dd772a29c19.jpg' : courseImage,
         observation: observation,
         localName: localName,
         localDescription: localDescription,
