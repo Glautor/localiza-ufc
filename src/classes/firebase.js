@@ -36,6 +36,21 @@ class Firebase {
     return result
   }
 
+  async removeItem(itemId) {
+    Alert.alert(
+      "Tem certeza?",
+      "Certeza que quer excluir essa disciplina?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => firebase.firestore().collection('disciplinas').doc(itemId).delete() }
+      ]
+    );
+  }
+
   async getItems() {
     var itemList = [];
     var likedItems = await this.getLikedSubjects();
