@@ -20,7 +20,7 @@ export default function LoginPage({ navigation }) {
     //   }).catch(err => err)
     // }, []);
 
-    function handleLogin() {
+    async function handleLogin() {
       //navigation.navigate('SubjectPages')
       // const response = await api.post('/devs', { username: user });       
 
@@ -29,7 +29,13 @@ export default function LoginPage({ navigation }) {
       // await AsyncStorage.setItem('user', _id);
 
       // navigation.navigate('Main', { user: _id });
-      Firebase.signIn(userRegistrationEmail, userPassword);  
+      var result = await Firebase.signIn(userRegistrationEmail, userPassword);  
+      
+      if(result){
+        navigation.navigate('SubjectPages')
+      }else{
+        //Show erro
+      }
     }
 
     return (

@@ -18,34 +18,42 @@ class Firebase {
     appId: "1:416784167534:web:601062edf50786bfeaec7f"
   };
 
-  signUp(email, password, name, registration) {
+  async signUp(email, password, name, registration) {
+    var result = false
     try {
-      firebase.auth().createUserWithEmailAndPassword(email, password);
-      const currentUser = firebase.auth().currentUser;
-  
-      const db = firebase.firestore();
-      db.collection("users")
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const currentUser = firebase.auth().currentUser;  
+      if(currentUser != null){
+        const db = firebase.firestore();
+        db.collection("users")
         .doc(currentUser.uid)      
         .set({
           email: currentUser.email,
           name: name,
           registration: registration,
         });
+        result = true
+      }      
     } catch (err) {
       Alert.alert("Erro ao cadastrar!", err.message);
+      result = false
     }
+
+    return result
   }
 
-  signIn(email, password) {
+  async signIn(email, password) {
+    var result = false
     try{
-      firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(function (user){
-        //Login ok here
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function (user){        
         console.log(user);
+        result = true
       })
     }catch(error){
-      console.log(error.toSring());
-    }   
+      result = false
+    } 
+    return result  
   }
 
   saveData(path, key, data) {
