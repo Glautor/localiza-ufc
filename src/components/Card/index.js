@@ -41,6 +41,7 @@ export default function Card({
 
   const handlEditSubject = () => {
     navigation.navigate('SubjectEditPage', {
+      subjectId,
       subjectName,
       subjectHour,
       subjectWeekDays,

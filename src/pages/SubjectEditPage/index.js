@@ -6,6 +6,7 @@ import styles from './styles';
 export default function SubjectEditPage({
   navigation
 }) {
+    const [subjectId, setSubjectId] = useState(null)
     const [subjectName, setSubjectName] = useState('')
     const [subjectHour, setSubjectHour] = useState('')
     const [subjectWeekDays, setSubjectWeekDays] = useState('')
@@ -20,6 +21,7 @@ export default function SubjectEditPage({
     const [longitude, setLongitude] = useState(null)
 
     useEffect(() => {
+      setSubjectId(navigation.state.params.subjectId)
       setSubjectName(navigation.state.params.subjectName)
       setSubjectHour(navigation.state.params.subjectHour)
       setSubjectWeekDays(navigation.state.params.subjectWeekDays)
