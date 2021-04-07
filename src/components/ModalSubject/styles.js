@@ -86,19 +86,13 @@ const styles = StyleSheet.create({
     height: 400,
     margin: 30
   },
-  containerMaps: {
+  containerMap: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  paragraph: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
   map: {
-    // width: Dimensions.get('window').width,
-    // height: Dimensions.get('window').height,
     width: 300,
     height: 300,
   },

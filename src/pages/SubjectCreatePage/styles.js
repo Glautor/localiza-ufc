@@ -86,6 +86,19 @@ const styles = StyleSheet.create({
   signInLink: {
     color: '#03679D',
   },
+
+  containerMap: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  map: {
+    marginTop: 8,
+    width: 335,
+    height: 200,
+  },
 });
 
 export default styles

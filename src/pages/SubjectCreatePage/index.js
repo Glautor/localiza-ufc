@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView, View } from 'react-native';
 
 import firebase from '../../classes/firebase';
 
-import styles from './styles';
+import MapView from 'react-native-maps';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
+
+import styles from './styles';
 
 export default function SubjectCreatePage({ navigation }) {
     const [subjectName, setSubjectName] = useState('')
@@ -20,6 +22,20 @@ export default function SubjectCreatePage({ navigation }) {
     const [localDescription, setLocalDescription] = useState('')
     const [latitude, setLatitude] = useState(null)
     const [longitude, setLongitude] = useState(null)
+    const [location, setLocation] = useState(null)
+
+    useEffect(() => {
+      setLocation(
+        {
+          region: {
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }
+        }
+      );
+    }, [latitude, longitude])
 
     const handleSave = () => {
       firebase.newItem({
@@ -38,23 +54,6 @@ export default function SubjectCreatePage({ navigation }) {
       }).then((result) => {
         navigation.goBack();
       });
-      
-      // const response = await api.post('/disciplines', { 
-      //   subjectName,
-      //   subjectHour,
-      //   subjectWeekDays,
-      //   subjectCode,
-      //   profesorName,
-      //   localization,
-      //   courseName,
-      //   courseImage,
-      //   observation,
-      //   localName,
-      //   localDescription,
-      //   latitude,
-      //   longitude,
-      // });
-      // const { _id } = response.data;
     }
 
     const getLocation = async () => {
@@ -185,10 +184,27 @@ export default function SubjectCreatePage({ navigation }) {
               onChangeText={setLocalDescription}
             />
 
-            {longitude && latitude && (
-              <Text style={styles.locationLoaded}>
-                Localização carregada
-              </Text>
+            {latitude && longitude && (
+              <>
+                <Text style={styles.locationLoaded}>
+                  Localização carregada
+                </Text>
+
+                <View style={styles.containerMap}>
+                  <MapView style={styles.map}
+                    initialRegion={location && location.region}
+                  >
+                    <MapView.Marker
+                      coordinate={{
+                        latitude: parseFloat(latitude),
+                        longitude: parseFloat(longitude)
+                      }}
+                      title={localName}
+                      description={localDescription}
+                    />
+                  </MapView>
+                </View>
+              </>
             )}
 
             <TouchableOpacity style={styles.myLocalizationButton} onPress={getLocation}>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Alert, Platform, Modal, Text, Pressable, View, Image, Linking } from "react-native";
+import { Alert, Platform, Modal, Text, Pressable, View, Linking } from "react-native";
 import styles from './styles'
 
 import MapView from 'react-native-maps';
-
-import Constants from 'expo-constants';
-import * as Location from 'expo-location';
 
 export default function ModalSubject({ 
   setModalVisible,
@@ -20,7 +17,6 @@ export default function ModalSubject({
   longitude,
 }) {
   const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
     setLocation(
@@ -76,7 +72,7 @@ export default function ModalSubject({
               <Text style={styles.informationName}>Observação: {observation}</Text>
           </View>
               {location && (
-                <View style={styles.containerMaps}>
+                <View style={styles.containerMap}>
                   <MapView style={styles.map}
                     initialRegion={location && location.region}
                   >
