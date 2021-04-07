@@ -18,7 +18,7 @@ const NavStack = createStackNavigator(
       },
       LoginPage: { 
           screen: LoginPage,
-          navigationOptions: { title: 'Login' },
+          navigationOptions: { title: 'Localiza UFC' },
       },
       RegisterPage: {
         screen: RegisterPage,

@@ -31,6 +31,7 @@ export default function Card({
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(likedSubject);
   const [trashSubject, setTrashSubject] = useState(likedSubject);
+  const [show, setShow] = useState(false);
 
   const handleLikedSubject = () => {
     firebase.isLiked(subjectId).then((isIt) => {
@@ -55,6 +56,24 @@ export default function Card({
     });
   }
 
+  // const show = () => {
+  //   if (iconEvent === 'heart') {
+  //     return true
+  //   } else if (iconEvent === 'trash') {
+  //     return !liked
+  //   }
+  // }
+
+  useEffect(() => {
+    if (iconEvent === 'heart' || iconEvent === 'edit') {
+      setShow(true);
+    } else if (iconEvent === 'trash') {
+      if (liked) {
+        setShow(true);
+      }
+    }
+  }, [])
+
   const handlEditSubject = () => {
     navigation.navigate('SubjectEditPage', {
       subjectId,
@@ -75,7 +94,7 @@ export default function Card({
 
   return (
     <>
-      {trashSubject && (
+      {show && (
         <>
           <Modal
             setModalVisible={setModalVisible}

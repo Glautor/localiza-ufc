@@ -26,17 +26,17 @@ export default function SubjectEditPage({
     const [location, setLocation] = useState(null)
 
     useEffect(() => {
-    setLocation(
-      {
-        region: {
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+      setLocation(
+        {
+          region: {
+            latitude: latitude,
+            longitude: longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }
         }
-      }
-    );
-  }, [latitude, longitude])
+      );
+    }, [latitude, longitude])
 
     useEffect(() => {
       setSubjectId(navigation.state.params.subjectId)
@@ -52,14 +52,6 @@ export default function SubjectEditPage({
       setLocalDescription(navigation.state.params.localDescription)
       setLatitude(navigation.state.params.latitude)
       setLongitude(navigation.state.params.longitude)
-      setLocation({
-        region: {
-          latitude: latitude,
-          longitude: longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }
-      })
     })
 
     const handleSave = () => {
@@ -200,7 +192,7 @@ export default function SubjectEditPage({
                 Localização carregada
                 </Text>
 
-              {/* <View style={styles.containerMap}>
+              <View style={styles.containerMap}>
                 <MapView style={styles.map}
                   initialRegion={location && location.region}
                 >
@@ -213,7 +205,7 @@ export default function SubjectEditPage({
                     description={localDescription}
                   />
                 </MapView>
-              </View> */}
+              </View>
             </>
           )}
 

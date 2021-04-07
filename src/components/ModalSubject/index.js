@@ -74,7 +74,7 @@ export default function ModalSubject({
               {location && (
                 <View style={styles.containerMap}>
                   <MapView style={styles.map}
-                    initialRegion={location && location.region}
+                    initialRegion={location.region}
                   >
                   <MapView.Marker
                     coordinate={{
