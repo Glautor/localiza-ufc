@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView, View, Alert } from 'react-native';
 
 import MapView from 'react-native-maps';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 
 import styles from './styles';
+import firebase from '../../classes/firebase';
 
 export default function SubjectEditPage({
   navigation
@@ -52,10 +53,44 @@ export default function SubjectEditPage({
       setLocalDescription(navigation.state.params.localDescription)
       setLatitude(navigation.state.params.latitude)
       setLongitude(navigation.state.params.longitude)
-    })
+    }, [])
 
     const handleSave = () => {
+      firebase.editItems(subjectId, {
+        subjectName: subjectName,
+        subjectHour: subjectHour,
+        subjectWeekDays: subjectWeekDays,
+        subjectCode: subjectCode,
+        profesorName: profesorName,
+        courseName: courseName,
+        courseImage: (courseImage === '') ? 'https://i.pinimg.com/474x/06/3e/74/063e742a8e8c4f256c179ffcdcfc8a32--caduceus-tattoo-hen-house.jpg' : courseImage,
+        observation: observation,
+        localName: localName,
+        localDescription: localDescription,
+        latitude: latitude,
+        longitude: longitude,
+      }).then((result) => {
+        navigation.goBack();
+      });
+
       navigation.goBack();
+    }
+
+    const handleRemove = () => {
+      Alert.alert(
+        "Tem certeza?",
+        "Certeza que quer excluir essa disciplina?",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => {
+            firebase.removeItem(subjectId).then(() => navigation.goBack());
+          }}
+        ]
+      );
     }
 
     const getLocation = async () => {
@@ -215,6 +250,10 @@ export default function SubjectEditPage({
 
           <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
             <Text style={styles.buttonText}>Salvar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.deleteButton} onPress={handleRemove}>
+            <Text style={styles.buttonText}>Excluir</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </ScrollView>

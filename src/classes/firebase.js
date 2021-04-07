@@ -37,18 +37,25 @@ class Firebase {
   }
 
   async removeItem(itemId) {
-    Alert.alert(
-      "Tem certeza?",
-      "Certeza que quer excluir essa disciplina?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => firebase.firestore().collection('disciplinas').doc(itemId).delete() }
-      ]
-    );
+    firebase.firestore().collection('disciplinas').doc(itemId).delete();
+  }
+
+  async editItems(subjectId, subjectData) {
+    let result = false;
+
+    try {
+      await firebase.firestore()
+      .collection('disciplinas')
+      .doc(subjectId)
+      .set(subjectData);
+
+      result = true;
+    } catch (err) {
+      Alert.alert("Erro ao cadastrar disciplina!", err.message);
+      result = false;
+    }
+
+    return result;
   }
 
   async getItems() {
@@ -73,6 +80,7 @@ class Firebase {
 
     return itemList;
   }
+
   async newItem(subjectData) {
     let result = false;
 
