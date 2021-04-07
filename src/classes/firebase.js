@@ -25,7 +25,7 @@ class Firebase {
   
       const db = firebase.firestore();
       db.collection("users")
-        .doc(currentUser.uid)
+        .doc(currentUser.uid)      
         .set({
           email: currentUser.email,
           name: name,
@@ -37,11 +37,15 @@ class Firebase {
   }
 
   signIn(email, password) {
-    try {
-     firebase.auth().signInWithEmailAndPassword(email, password);
-    } catch (err) {
-      Alert.alert("Erro ao entrar!", err.message);
-    }
+    try{
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function (user){
+        //Login ok here
+        console.log(user);
+      })
+    }catch(error){
+      console.log(error.toSring());
+    }   
   }
 
   saveData(path, key, data) {
