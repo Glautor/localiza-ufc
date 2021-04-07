@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 
 import styles from './styles';
 
-export default function SubjectEditPage({ navigation }) {
+export default function SubjectEditPage({
+  navigation
+}) {
     const [subjectName, setSubjectName] = useState('')
     const [subjectHour, setSubjectHour] = useState('')
     const [subjectWeekDays, setSubjectWeekDays] = useState('')
@@ -16,6 +18,21 @@ export default function SubjectEditPage({ navigation }) {
     const [localDescription, setLocalDescription] = useState('')
     const [latitude, setLatitude] = useState(null)
     const [longitude, setLongitude] = useState(null)
+
+    useEffect(() => {
+      setSubjectName(navigation.state.params.subjectName)
+      setSubjectHour(navigation.state.params.subjectHour)
+      setSubjectWeekDays(navigation.state.params.subjectWeekDays)
+      setSubjectCode(navigation.state.params.subjectCode)
+      setProfesorName(navigation.state.params.profesorName)
+      setCourseName(navigation.state.params.courseName)
+      setCourseImage(navigation.state.params.courseImage)
+      setObservation(navigation.state.params.observation)
+      setLocalName(navigation.state.params.localName)
+      setLocalDescription(navigation.state.params.localDescription)
+      setLatitude(navigation.state.params.latitude)
+      setLongitude(navigation.state.params.longitude)
+    })
 
     const handleSave = () => {
       navigation.goBack();

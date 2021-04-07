@@ -39,6 +39,27 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  locationLoaded: {
+    color: '#63B68D',
+    marginTop: 8
+  },
+
+  myLocalizationButtonText: {
+    color: '#03679D',
+  },
+
+  myLocalizationButton: {
+    height: 46,
+    alignSelf: 'stretch',
+    backgroundColor: 'transparent',
+    borderColor: '#03679D',
+    borderWidth: 1,
+    borderRadius: 4,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   buttonText: {
       color: '#fff',
       fontWeight: 'bold',

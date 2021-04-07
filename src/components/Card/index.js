@@ -17,13 +17,14 @@ export default function Card({
     courseName,
     courseImage,
     observation,
-    likedSubject,
-    latitude,
-    longitude,
     localName,
     localDescription,
+    latitude,
+    longitude,
+    likedSubject,
     iconEvent,
-    navigation
+    navigation,
+    route
   }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(likedSubject);
@@ -38,7 +39,20 @@ export default function Card({
   }
 
   const handlEditSubject = () => {
-    navigation.navigate('SubjectEditPage')
+    navigation.navigate('SubjectEditPage', {
+      subjectName,
+      subjectHour,
+      subjectWeekDays,
+      subjectCode,
+      profesorName,
+      courseName,
+      courseImage,
+      observation,
+      localName,
+      localDescription,
+      latitude,
+      longitude
+    })
   }
 
   return (
