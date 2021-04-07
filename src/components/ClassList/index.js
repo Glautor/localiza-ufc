@@ -20,6 +20,7 @@ const ClassList = ({ iconEvent, navigation }) => {
 
   const renderCard = ({ item }) => (
     <Card
+      subjectId={item.id}
       subjectName={item.subjectName}
       courseImage={item.courseImage}
       courseName={item.courseName}
