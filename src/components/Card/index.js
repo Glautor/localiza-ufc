@@ -7,6 +7,7 @@ import emptyHeart from '../../../assets/empty-heart.jpg';
 import fullHeart from '../../../assets/full-heart.jpg';
 import trash from '../../../assets/trash.jpg';
 import edit from '../../../assets/edit.jpg';
+import firebase from '../../classes/firebase';
 
 export default function Card({
     subjectId,
@@ -29,14 +30,29 @@ export default function Card({
   }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [liked, setLiked] = useState(likedSubject);
-  const [trashSubject, setTrashSubject] = useState(true);
+  const [trashSubject, setTrashSubject] = useState(likedSubject);
 
   const handleLikedSubject = () => {
-    setLiked(!liked);
+    firebase.isLiked(subjectId).then((isIt) => {
+      if (isIt === false) {
+        firebase.likeSubject(subjectId).then(() => {
+          setLiked(true);
+          setTrashSubject(true);
+        });
+      } else {
+        firebase.unlikeSubject(subjectId).then(() => {
+          setLiked(false);
+          setTrashSubject(false);
+        });
+      }
+    });
   }
 
   const handleTrashSubject = () => {
-    setTrashSubject(false);
+    firebase.unlikeSubject(subjectId).then(() => {
+      setLiked(false);
+      setTrashSubject(false);
+    });
   }
 
   const handlEditSubject = () => {

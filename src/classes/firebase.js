@@ -38,6 +38,7 @@ class Firebase {
 
   async getItems() {
     var itemList = [];
+    var likedItems = await this.getLikedSubjects();
 
     var snapshot = await firebase
       .firestore()
@@ -47,6 +48,10 @@ class Firebase {
     snapshot.forEach((doc) => {
       var data = doc.data();
       data['id'] = doc.id;
+
+      if (likedItems.includes(doc.id)) {
+        data['likedSubject'] = true;
+      }
 
       itemList.push(data);
     });
@@ -84,6 +89,50 @@ class Firebase {
     return result
   }
 
+  async getLikedSubjects() {
+    const currentUser = firebase.auth().currentUser;
+
+    if (currentUser !== null) {
+      var snapshot = await firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+      var data = snapshot.data();
+      var likedSubjects = data.likedSubjects;
+
+      if (likedSubjects === null || likedSubjects === undefined) {
+        likedSubjects = [];
+      }
+
+      return likedSubjects;
+    }
+  }
+
+  async isLiked(subjectId) {
+    const currentUser = firebase.auth().currentUser;
+
+    if (currentUser !== null) {
+      var snapshot = await firebase.firestore()
+        .collection('users')
+        .doc(currentUser.uid)
+        .get();
+
+      var data = snapshot.data();
+      var likedSubjects = data.likedSubjects;
+
+      if (likedSubjects === null || likedSubjects === undefined) {
+        likedSubjects = [];
+      }
+
+      if (likedSubjects.includes(subjectId)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   async likeSubject(subjectId) {
     const currentUser = firebase.auth().currentUser;
 
@@ -96,7 +145,7 @@ class Firebase {
       var data = snapshot.data();
       var likedSubjects = data.likedSubjects;
 
-      if (likedSubjects === null) {
+      if (likedSubjects === null || likedSubjects === undefined) {
         likedSubjects = [];
       }
 
@@ -122,7 +171,7 @@ class Firebase {
       var data = snapshot.data();
       var likedSubjects = data.likedSubjects;
 
-      if (likedSubjects === null) {
+      if (likedSubjects === null || likedSubjects === undefined) {
         return;
       }
 
