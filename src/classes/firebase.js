@@ -51,7 +51,10 @@ class Firebase {
       .get();
   
     snapshot.forEach((doc) => {
-      itemList.push(doc.data());
+      var data = doc.data();
+      data['id'] = doc.id;
+
+      itemList.push(data);
     });
   
     return itemList;
