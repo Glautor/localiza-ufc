@@ -19,6 +19,7 @@ const ClassList = ({ iconEvent, navigation }) => {
 
   const renderCard = ({ item }) => (
     <Card
+      key={item.subjectId}
       createdBy={item.createdBy}
       subjectId={item.subjectId}
       subjectName={item.subjectName}
