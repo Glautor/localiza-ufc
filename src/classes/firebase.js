@@ -42,6 +42,21 @@ class Firebase {
     return result
   }
 
+  async getItems() {
+    var itemList = [];
+  
+    var snapshot = await firebase
+      .firestore()
+      .collection("disciplinas")
+      .get();
+  
+    snapshot.forEach((doc) => {
+      itemList.push(doc.data());
+    });
+  
+    return itemList;
+  } 
+
   async signIn(email, password) {
     var result = false
     try{
@@ -87,7 +102,7 @@ class Firebase {
       .once('value', (snapshot) => data = snapshot.val());
 
     return data;
-  }
+  }    
 }
 
 export default new Firebase();
