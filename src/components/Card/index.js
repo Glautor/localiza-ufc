@@ -10,6 +10,7 @@ import edit from '../../../assets/edit.jpg';
 import firebase from '../../classes/firebase';
 
 export default function Card({
+    createdBy,
     subjectId,
     subjectName,
     subjectHour,
@@ -90,6 +91,10 @@ export default function Card({
       latitude,
       longitude
     })
+  }
+
+  if (createdBy !== firebase.getUserId() && iconEvent === 'edit') {
+    return null;
   }
 
   return (
