@@ -9,6 +9,7 @@ import trash from '../../../assets/trash.jpg';
 import edit from '../../../assets/edit.jpg';
 
 export default function Card({
+    subjectId,
     subjectName,
     subjectHour,
     subjectWeekDays,

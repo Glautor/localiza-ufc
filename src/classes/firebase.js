@@ -51,11 +51,30 @@ class Firebase {
       .get();
   
     snapshot.forEach((doc) => {
-      itemList.push(doc.data());
+      var data = doc.data();
+      data['id'] = doc.id;
+
+      itemList.push(data);
     });
   
     return itemList;
-  } 
+  }
+  async newItem(subjectData) {
+    let result = false;
+
+    try {
+      await firebase.firestore()
+      .collection('disciplinas')
+      .add(subjectData);
+
+      result = true;
+    } catch (err) {
+      Alert.alert("Erro ao cadastrar disciplina!", err.message);
+      result = false;
+    }
+
+    return result;
+  }
 
   async signIn(email, password) {
     var result = false
